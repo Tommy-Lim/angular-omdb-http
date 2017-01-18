@@ -10,23 +10,24 @@ app.controller("MovieCtrl", ["$scope", "$http",
 
   $scope.search = function() {
     var req = {
-      url: 'http://www.omdbapi.com',
+      url: 'http://api.giphy.com/v1/gifs/search',
       method: "GET",
       params: {
-        s: $scope.searchTerm
+        q: $scope.searchTerm,
+        api_key: "dc6zaTOxFJmzC"
       }
-    }
+    };
 
     $http(req).then(function success(res) {
-      console.log("HTTP success:", res);
+      console.log("HTTP success:", res.data.data);
       if (res.data.Error === "Movie not found!") {
         $scope.results = [];
       } else {
-        $scope.results = res.data.Search;
+        $scope.results = res.data.data;
       }
     }, function failure(res) {
       $scope.results = [];
       console.log("HTTP failed:", res);
     });
-  }
+  };
 }]);
