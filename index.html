@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="MovieApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular OMDB</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="MovieCtrl">
+    <h1>Angular OMBD</h1>
+    <form ng-submit="search()">
+      <input type="text" ng-model="searchTerm" />
+      <button type="submit">search OMDB</button>
+    </form>
+    <div ng-show="results !== undefined && results.length === 0">
+      Sorry, no results.
+    </div>
+    <div ng-show="results !== undefined && results.length > 0"
+         ng-repeat="result in results">
+      <h3>({{result.Year}}) {{result.Title}}</h3>
+      <img ng-if="result.Poster !== 'N/A'"
+           ng-src="{{result.Poster}}" />
+      <img ng-if="result.Poster === 'N/A'" src="not-found.jpg">
+    </div>
+  </body>
+</html>
